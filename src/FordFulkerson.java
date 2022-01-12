@@ -91,20 +91,29 @@ public class FordFulkerson {
             // reverse edges along the path
             for (v = t; v != s; v = parent[v]) {
                 u = parent[v];
+                // u->v
                 rGraph[u][v] -= path_flow;
                 rGraph[v][u] += path_flow;
-                //pleaca de la u+1 -> v+1;
-                for(Arc a:listaArce)
+               /* for(Arc a:listaArce)
                 {
                     if(a.getStartNode().getNumber()==u+1 && a.getEndNode().getNumber()==v+1)
                     {
                         int cap=a.getCapacitate();
-                        a.setCapacitate(cap-path_flow+cap-rGraph[v][u]);
+                        a.setCapacitate(cap-rGraph[u][v]+rGraph[v][u]);
                     }
-                }
+                }*/
+
             }
 
             max_flow +=path_flow;
+
+        }
+
+        for(Arc a:listaArce)
+        {
+
+            int cap=a.getCapacitate();
+            a.setCapacitate(cap-rGraph[a.getStartNode().getNumber()-1][a.getEndNode().getNumber()-1]);
 
         }
 
