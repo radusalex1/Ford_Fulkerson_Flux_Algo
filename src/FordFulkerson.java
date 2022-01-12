@@ -76,18 +76,17 @@ public class FordFulkerson {
             // along the path filled by BFS. Or we can say
             // find the maximum flow through the path found.
             int path_flow = Integer.MAX_VALUE;
-            for(v=t;v!=s;v=parent[v])
-            {
-                u=parent[v];
-                //somehow here get nodes;
-                path_flow=Math.min(path_flow,rGraph[u][v]);
+
+            for (v = t; v != s; v = parent[v]) {
+                u = parent[v];
+                path_flow
+                        = Math.min(path_flow, rGraph[u][v]);
             }
 
             // update residual capacities of the edges and
             // reverse edges along the path
-            for(v=t;v!=s;v=parent[v])
-            {
-                u=parent[v];
+            for (v = t; v != s; v = parent[v]) {
+                u = parent[v];
                 rGraph[u][v] -= path_flow;
                 rGraph[v][u] += path_flow;
             }

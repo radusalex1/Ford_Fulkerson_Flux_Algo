@@ -7,7 +7,7 @@ public class Arc {
     private Nod endNode;
     private Nod startNode;
     private int capacitate;
-    private int flux;
+    private int flux=0;
 
     public Arc(Point startPoint, Point endPoint) {
         this.startPoint = startPoint;

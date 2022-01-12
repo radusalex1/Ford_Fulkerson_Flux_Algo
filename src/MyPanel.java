@@ -21,6 +21,8 @@ public class MyPanel extends JPanel {
     boolean isDragging = false;
     boolean moving=false;
 
+    int maximumFlow=0;
+
     int graph[][] = new int[][] {
             { 0, 16, 13, 0, 0, 0 },
             { 0, 0, 10, 12, 0, 0 },
@@ -46,7 +48,7 @@ public class MyPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 System.out.print("flow max");
 
-                displayCostMatrix(CreateCostMatrix());
+                displayCostMatrix(CreateCapacityMatrix());
 
                 Scanner input = new Scanner(System.in);
                 System.out.print("nodul start");
@@ -56,7 +58,9 @@ public class MyPanel extends JPanel {
 
                 FordFulkerson ff = new FordFulkerson(6);
 
-                System.out.print(ff.fordFulkerson(graph,start-1,finish-1));
+                maximumFlow=ff.fordFulkerson(graph,start-1,finish-1);
+
+                repaint();
 
                 //nr noduri = listanoduri.size();
                 //apelez cu(start-1,finish-1);
@@ -117,13 +121,13 @@ public class MyPanel extends JPanel {
                             System.out.print("capacitate:" + arc.getStartNode().getNumber()+"-"+arc.getEndNode().getNumber());
 
                             int capacitate = input.nextInt();
-
+/*
                             System.out.print("flux:" + arc.getStartNode().getNumber()+"-"+arc.getEndNode().getNumber());
 
-                            int flux = input.nextInt();
+                            int flux = input.nextInt();*/
 
                             arc.setCapacitate(capacitate);
-                            arc.setFlux(flux);
+                            // arc.setFlux(flux);
 
                             listaArce.add(arc);
 
@@ -179,6 +183,10 @@ public class MyPanel extends JPanel {
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
+        if(maximumFlow!=0)
+        {
+            g.drawString("Maximum Flow is:"+maximumFlow, 10,50);
+        }
         if(moving)
         {
             for(Nod n:listaNoduri)
@@ -294,7 +302,7 @@ public class MyPanel extends JPanel {
             }
         }
     }
-    public int[][] CreateCostMatrix()
+    public int[][] CreateCapacityMatrix()
     {
         int[][] costMatrix = new int[listaNoduri.size()+1][listaNoduri.size()+1];
         for (int i = 1; i < listaNoduri.size() + 1; i++) {
