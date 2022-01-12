@@ -89,7 +89,7 @@ public class Arc {
         g.fillPolygon(xpoints, ypoints, 3);
 
         g.setColor(java.awt.Color.black);
-        g.drawString("C:"+((Integer)capacitate).toString()+" && F:"+((Integer)flux).toString(),(endNode.getCoordX()+startNode.getCoordX())/2,(endNode.getCoordY()+startNode.getCoordY())/2);
+        g.drawString("C:"+((Integer)capacitate).toString(),(endNode.getCoordX()+startNode.getCoordX())/2,(endNode.getCoordY()+startNode.getCoordY())/2);
     }
 
 }

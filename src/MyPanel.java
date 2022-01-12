@@ -53,12 +53,13 @@ public class MyPanel extends JPanel {
                 Scanner input = new Scanner(System.in);
                 System.out.print("nodul start");
                 int start = input.nextInt();
+
                 System.out.print("nodul final" );
                 int finish = input.nextInt();
 
-                FordFulkerson ff = new FordFulkerson(6);
+                FordFulkerson ff = new FordFulkerson(listaNoduri.size(),listaArce,listaNoduri);
 
-                maximumFlow=ff.fordFulkerson(graph,start-1,finish-1);
+                maximumFlow=ff.fordFulkerson(CreateCapacityMatrix(),start-1,finish-1);
 
                 repaint();
 
@@ -127,7 +128,7 @@ public class MyPanel extends JPanel {
                             int flux = input.nextInt();*/
 
                             arc.setCapacitate(capacitate);
-                            // arc.setFlux(flux);
+                            //arc.setFlux(flux);
 
                             listaArce.add(arc);
 

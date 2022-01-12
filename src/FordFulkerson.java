@@ -1,10 +1,15 @@
 import java.util.LinkedList;
+import java.util.Vector;
 
 public class FordFulkerson {
     private int nrNoduri;
+    private Vector<Arc> listaArce;
+    private Vector<Nod> listaNoduri;
 
-    public FordFulkerson(int nrNoduri) {
+    public FordFulkerson(int nrNoduri,Vector<Arc> listaArce,Vector<Nod> listaNoduri) {
         this.nrNoduri = nrNoduri;
+        this.listaArce=listaArce;
+        this.listaNoduri=listaNoduri;
     }
 
     boolean bfs(int rGraph[][],int s,int t,int parent[])
@@ -79,8 +84,7 @@ public class FordFulkerson {
 
             for (v = t; v != s; v = parent[v]) {
                 u = parent[v];
-                path_flow
-                        = Math.min(path_flow, rGraph[u][v]);
+                path_flow = Math.min(path_flow, rGraph[u][v]);
             }
 
             // update residual capacities of the edges and
@@ -89,6 +93,15 @@ public class FordFulkerson {
                 u = parent[v];
                 rGraph[u][v] -= path_flow;
                 rGraph[v][u] += path_flow;
+                //pleaca de la u+1 -> v+1;
+                for(Arc a:listaArce)
+                {
+                    if(a.getStartNode().getNumber()==u+1 && a.getEndNode().getNumber()==v+1)
+                    {
+                        int cap=a.getCapacitate();
+                        a.setCapacitate(cap-path_flow+cap-rGraph[v][u]);
+                    }
+                }
             }
 
             max_flow +=path_flow;
