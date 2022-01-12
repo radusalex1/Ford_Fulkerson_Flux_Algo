@@ -94,14 +94,6 @@ public class FordFulkerson {
                 // u->v
                 rGraph[u][v] -= path_flow;
                 rGraph[v][u] += path_flow;
-               /* for(Arc a:listaArce)
-                {
-                    if(a.getStartNode().getNumber()==u+1 && a.getEndNode().getNumber()==v+1)
-                    {
-                        int cap=a.getCapacitate();
-                        a.setCapacitate(cap-rGraph[u][v]+rGraph[v][u]);
-                    }
-                }*/
 
             }
 
